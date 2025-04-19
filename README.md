@@ -1,4 +1,7 @@
-<h1 align="center">Merhaba👋, Ben Enes Yürekli</h1>
+<h1 align="center">
+  <a href="https://git.io/typing-svg"><img src="https://readme-typing-svg.demolab.com?font=Fira+Code&pause=1000&color=F744E6&background=24FF4F00&center=true&width=435&lines=Merhaba+%F0%9F%91%8B;Ben+Enes+Y%C3%BCrekli" alt="Typing SVG" /></a>
+</h1>
+
 <h3 align="center">Bilgisayar mühendisliği 2. sınıf öğrencisiyim. Ağırlıklı olarak Oyun Geliştirme alanında ilerlemekteyim. Bunun yanında Back-End geliştirici olarak kendimi geliştirmekteyim.</h3>
 
 - 🌱 Şu anda ne öğreniyorum **Unity’de C# ile 2D oyun geliştirme sürecinde tilemap tabanlı harita sistemleri, animasyon controller yönetimi, event tabanlı input sistemi, UI etkileşimleri, sahneler arası veri aktarımı, state machine mantığı, scriptable object kullanımı ve temel oyun içi efekt sistemleri üzerine çalışıyorum. Express.js ile REST API geliştirme, MongoDB'de veri modelleme, JWT tabanlı kullanıcı doğrulama ve temel middleware yapıları üzerine çalışıyorum.**
