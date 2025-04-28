@@ -21,7 +21,6 @@
   <br />
   <img src="https://github-readme-stats.vercel.app/api?username=0alduin0&show_icons=true&theme=highcontrast&title_color=f12eff&text_color=ededed&locale=en" alt="Stats" />
   <br />
-  <img src="https://github-readme-streak-stats.herokuapp.com/?user=0alduin0&theme=dark" alt="Streak" />
 </p>
 
 
