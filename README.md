@@ -1,3 +1,6 @@
+<p align="left">
+  <img src="https://komarev.com/ghpvc/?username=0Alduin0&label=Profile+Views&color=blueviolet&style=for-the-badge" alt="k0laa" />
+</p>
 <h1 align="center">
   <a href="https://git.io/typing-svg"><img src="https://readme-typing-svg.demolab.com?font=Fira+Code&pause=1000&color=F744E6&background=24FF4F00&center=true&width=435&lines=Merhaba+%F0%9F%91%8B;Ben+Enes+Y%C3%BCrekli" alt="Typing SVG" /></a>
 </h1>
