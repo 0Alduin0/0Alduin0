@@ -25,6 +25,7 @@
   <img src="https://github-readme-stats.vercel.app/api/top-langs?username=0alduin0&show_icons=true&theme=highcontrast&title_color=f12eff&text_color=ededed&locale=en&layout=compact" alt="Top Langs" />
   <br />
 </p>
+![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=anuraghazra&hide=javascript,html)
 
 
 <picture>
