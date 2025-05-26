@@ -21,7 +21,8 @@
 
 
 <p align="left">
-  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=0Alduin0&layout=compact&theme=tokyonight" width="30%" />
+  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=0Alduin0&layout=compact&theme=tokyonight" width="33%" />
+  <img src="https://github-readme-stats.vercel.app/api?username=0Alduin0&show_icons=true&theme=tokyonight&hide_title=false&count_private=true&include_all_commits=true" width="33%" />
 </p>
 
 
