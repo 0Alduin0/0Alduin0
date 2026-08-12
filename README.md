@@ -24,9 +24,7 @@
 - **Otomasyon** — Selenium ve BeautifulSoup ile veri kazıma, GitHub Actions üzerinde periyodik çalışan bildirim pipeline'ları.
 - **Bilgisayarlı görü** — PyTorch ve OpenCV ile nesne tespiti, model eğitimi ve görüntü işleme üzerine çalışıyorum.
 - **Web** — React / Vite ile arayüz geliştirme, Firebase entegrasyonu.
-
-🏆 BANÜJAM 2026 **2.'lik** · EBST Hackathon 2026 **1.'lik**
-
+- 
 <br/>
 
 ### 🛠️ Kullandıklarım
