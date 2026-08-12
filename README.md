@@ -56,8 +56,8 @@
 
 | | Proje | Açıklama |
 |---|---|---|
-| 🥈 | **Yankı** | BANÜJAM 2026 ikincisi korku-kaçış oyunu. Üç davranış tipine sahip düşman AI ve NavMesh pathfinding sistemini geliştirdim. `Unity` `C#` |
 | 🥇 | **Can Bağı** | EBST Hackathon 2026 birincisi afet iletişim sistemi. `FastAPI` `WebSocket` `ESP32` |
+| 🥈 | **Yankı** | BANÜJAM 2026 ikincisi korku-kaçış oyunu. Üç davranış tipine sahip düşman AI ve NavMesh pathfinding sistemini geliştirdim. `Unity` `C#` |
 | 🍉 | **Fruit Merge** | Fizik tabanlı 2D mobil merge oyunu. `Unity` `C#` |
 | 🤖 | **Donanım Arşivi Bot** | Fırsatları tarayıp WhatsApp'a bildirim gönderen otomasyon botu. `Python` `GitHub Actions` |
 
