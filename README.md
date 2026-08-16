@@ -1,53 +1,46 @@
 <div align="center">
-  <img src="./assets/hero.gif" width="100%" alt="Enes Yürekli — Game and Backend Developer animated command center" />
+  <img src="./assets/hero.gif" width="100%" alt="Enes Yürekli — Unity oyun geliştiricisi animasyonlu profil kapağı" />
 </div>
 
+<h1 align="center">Merhaba, ben Enes 👋</h1>
+
 <p align="center">
-  <code>GAME DEVELOPMENT</code>&nbsp;&nbsp;•&nbsp;&nbsp;
-  <code>REAL-TIME BACKENDS</code>&nbsp;&nbsp;•&nbsp;&nbsp;
-  <code>AI EXPERIMENTS</code>
+  <strong>Unity Oyun Geliştiricisi · C# · Oynanış Sistemleri</strong>
 </p>
 
 <p align="center">
-  I build responsive gameplay systems, scalable APIs, and playful technical experiments.<br/>
-  Computer Engineering student at Balıkesir University.
+  <a href="https://unity.com/"><img src="https://img.shields.io/badge/Unity-100000?style=for-the-badge&logo=unity&logoColor=white" alt="Unity" /></a>
+  <a href="https://learn.microsoft.com/dotnet/csharp/"><img src="https://img.shields.io/badge/C%23-512BD4?style=for-the-badge&logo=dotnet&logoColor=white" alt="C#" /></a>
+  <a href="https://github.com/0Alduin0?tab=followers"><img src="https://img.shields.io/github/followers/0Alduin0?style=for-the-badge&logo=github&label=Takipçi&color=181717" alt="GitHub takipçi sayısı" /></a>
 </p>
 
----
+## Hakkımda
 
-### About me
+Unity ve C# ile oyun geliştirmeye odaklanan bir Bilgisayar Mühendisliği öğrencisiyim. Oynanış hissi güçlü, bakımı kolay ve performanslı sistemler üretmeyi seviyorum.
 
-- 🎮 Building polished Unity systems with C#, ScriptableObjects, pooling and multiplayer networking
-- ⚡ Shipping REST and real-time services with Node.js, FastAPI, WebSockets and databases
-- 🧠 Exploring practical machine learning with Python, PyTorch and reinforcement learning
-- 🛠️ Currently focused on production architecture, performance and portfolio-ready projects
+- 🎮 Ana odağım: **Unity ile oyun geliştirme**
+- 🧩 İlgi alanlarım: oynanış mekanikleri, modüler mimari ve oyun yapay zekâsı
+- ⚙️ Çalışma yaklaşımım: prototiple, ölç, iyileştir ve parlat
+- 📍 Balıkesir Üniversitesi — Bilgisayar Mühendisliği
 
-### Contribution city
+## GitHub etkinliğim
 
 <div align="center">
-  <img src="./assets/contribution-city.svg" width="100%" alt="Daily-updated isometric GitHub contribution city" />
+  <img src="./assets/contribution-city.svg" width="100%" alt="0Alduin0 hesabının gerçek GitHub verileriyle her gün güncellenen katkı şehri" />
 </div>
 
-<sub>The city is rebuilt automatically from GitHub activity every day.</sub>
+<p align="center">
+  <sub>Katkılar, herkese açık depolar, takipçiler ve kullanılan diller GitHub Actions ile her gün yenilenir.</sub>
+</p>
 
-### Selected builds
-
-| Project | Stack | Focus |
-|:--|:--|:--|
-| **Survivor Mobile** | Unity 6 · C# · URP | Modular skills, enemy scaling, object pooling and mobile performance |
-| **Disaster Signal** | FastAPI · WebSocket · Flutter | Real-time incident reporting and live client updates |
-| **Snake AI** | Python · PyTorch | Q-learning agent, replay memory and model persistence |
-| **Photon Arena Prototype** | Unity · Photon PUN 2 | Multiplayer state synchronization, RPCs and animation replication |
-
-### Toolbox
+## Kullandığım araçlar
 
 ```text
-Gameplay     Unity · C# · ScriptableObjects · New Input System · Cinemachine
-Backend      Node.js · Express · FastAPI · REST · WebSocket · JWT
-Data & AI    Python · PyTorch · SQL · MongoDB · Firebase
-Workflow     Git · GitHub Actions · Postman · Vercel · Linux
+Oyun geliştirme  Unity · C# · Oynanış Sistemleri · Oyun Yapay Zekâsı
+Mühendislik      Git · GitHub · GitHub Actions · Performans Profilleme
+Yaklaşım         Temiz Kod · Modüler Tasarım · Hızlı Prototipleme
 ```
 
 <p align="center">
-  <i>Build small. Measure early. Polish what matters.</i>
+  <a href="https://github.com/0Alduin0?tab=repositories"><strong>Herkese açık depolarımı incele →</strong></a>
 </p>

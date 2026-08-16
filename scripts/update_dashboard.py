@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Create a daily-updated isometric contribution city as a safe static SVG."""
+"""Gerçek GitHub verilerinden günlük güncellenen güvenli bir katkı şehri üret."""
 
 from __future__ import annotations
 
@@ -24,7 +24,7 @@ GRAPHQL_QUERY = """
 query ProfileDashboard($login: String!) {
   user(login: $login) {
     followers { totalCount }
-    repositories(first: 100, ownerAffiliations: OWNER, isFork: false, orderBy: {field: UPDATED_AT, direction: DESC}) {
+    repositories(first: 100, ownerAffiliations: OWNER, isFork: false, privacy: PUBLIC, orderBy: {field: UPDATED_AT, direction: DESC}) {
       totalCount
       nodes { primaryLanguage { name color } }
     }
@@ -129,6 +129,11 @@ def polygon(points: list[tuple[float, float]], fill: str, opacity: float = 1.0) 
     return f'<polygon points="{value}" fill="{fill}" fill-opacity="{opacity:.2f}"/>'
 
 
+def short_label(value: str, limit: int = 16) -> str:
+    """Keep external labels inside the fixed-width statistics panel."""
+    return value if len(value) <= limit else f"{value[: limit - 1]}…"
+
+
 def cube(x: float, y: float, height: float, level: int) -> str:
     half_w = 5.8
     half_h = 3.1
@@ -166,10 +171,11 @@ def render_svg(data: dict, username: str, display_name: str) -> str:
     language_rows = []
     for index, (name, count, color) in enumerate(languages[:4]):
         y = 270 + index * 22
+        safe_language = escape(short_label(str(name)))
         language_rows.append(
             f'<circle cx="719" cy="{y-4}" r="4" fill="{escape(color)}"/>'
-            f'<text x="732" y="{y}" class="small">{escape(str(name))}</text>'
-            f'<text x="934" y="{y}" class="small value" text-anchor="end">{int(count)} repos</text>'
+            f'<text x="732" y="{y}" class="small">{safe_language}</text>'
+            f'<text x="934" y="{y}" class="small value" text-anchor="end">{int(count)} depo</text>'
         )
 
     today = dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%d")
@@ -177,8 +183,8 @@ def render_svg(data: dict, username: str, display_name: str) -> str:
     safe_user = escape(username)
 
     return f'''<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">
-  <title id="title">{safe_name} contribution city</title>
-  <desc id="desc">An isometric city generated from {int(data['total'])} GitHub contributions.</desc>
+  <title id="title">{safe_name} GitHub katkı şehri</title>
+  <desc id="desc">{int(data['total'])} gerçek GitHub katkısından oluşturulan izometrik şehir.</desc>
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0" stop-color="#060b18"/>
@@ -199,13 +205,17 @@ def render_svg(data: dict, username: str, display_name: str) -> str:
       .number {{ fill: #eefaff; font: 800 27px Inter, ui-sans-serif, system-ui, sans-serif; }}
       .small {{ fill: #a9bfd4; font: 500 11px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }}
       .value {{ fill: #55eaff; }}
+      .scan {{ animation: scan 5s ease-in-out infinite; }}
+      .pulse {{ animation: pulse 2.8s ease-in-out infinite; transform-origin: center; }}
+      @keyframes scan {{ 0%, 100% {{ opacity: 0.15; }} 50% {{ opacity: 0.75; }} }}
+      @keyframes pulse {{ 0%, 100% {{ opacity: 0.55; }} 50% {{ opacity: 1; }} }}
     </style>
   </defs>
   <rect width="1000" height="390" rx="24" fill="url(#bg)"/>
   <rect x="1" y="1" width="998" height="388" rx="23" fill="none" stroke="#36e8ff" stroke-opacity="0.2"/>
-  <path d="M32 62H968" stroke="url(#line)"/>
-  <text x="34" y="34" class="label">{safe_name} // CONTRIBUTION CITY</text>
-  <text x="34" y="50" class="small">@{safe_user} · AUTO UPDATED {today}</text>
+  <text x="34" y="34" class="label">{safe_name} // KATKI ŞEHRİ</text>
+  <text x="34" y="50" class="small">@{safe_user} · SON GÜNCELLEME {today}</text>
+  <path class="scan" d="M32 62H968" stroke="url(#line)" stroke-width="2"/>
 
   <g opacity="0.32">
     <path d="M91 111L553 349" stroke="#36e8ff" stroke-opacity="0.16"/>
@@ -214,25 +224,25 @@ def render_svg(data: dict, username: str, display_name: str) -> str:
   <g>{city}</g>
 
   <rect x="684" y="85" width="282" height="266" rx="18" fill="#071226" fill-opacity="0.84" stroke="#36e8ff" stroke-opacity="0.2"/>
-  <text x="711" y="113" class="label">YEAR SIGNAL</text>
-  <text x="711" y="148" class="number">{int(data['total']):,}</text>
-  <text x="711" y="168" class="small">CONTRIBUTIONS</text>
+  <text x="711" y="113" class="label">SON 12 AY</text>
+  <text x="711" y="148" class="number pulse">{int(data['total']):,}</text>
+  <text x="711" y="168" class="small">KATKI</text>
 
   <line x1="711" y1="189" x2="939" y2="189" stroke="#8eaac5" stroke-opacity="0.18"/>
   <text x="711" y="215" class="number">{int(data['repositories'])}</text>
-  <text x="711" y="233" class="small">PUBLIC REPOSITORIES</text>
+  <text x="711" y="233" class="small">HERKESE AÇIK DEPO</text>
   <text x="873" y="215" class="number">{int(data['followers'])}</text>
-  <text x="873" y="233" class="small">FOLLOWERS</text>
+  <text x="873" y="233" class="small">TAKİPÇİ</text>
 
-  <text x="711" y="259" class="label">PRIMARY LANGUAGES</text>
+  <text x="711" y="259" class="label">ÖNE ÇIKAN DİLLER</text>
   {''.join(language_rows)}
 
-  <text x="34" y="372" class="small">LOW SIGNAL</text>
+  <text x="34" y="372" class="small">AZ ETKİNLİK</text>
   <rect x="111" y="363" width="14" height="8" rx="2" fill="#16475a"/>
   <rect x="131" y="363" width="14" height="8" rx="2" fill="#167c8d"/>
   <rect x="151" y="363" width="14" height="8" rx="2" fill="#25b9c7"/>
   <rect x="171" y="363" width="14" height="8" rx="2" fill="#6cf4ff"/>
-  <text x="194" y="372" class="small">HIGH SIGNAL</text>
+  <text x="194" y="372" class="small">YÜKSEK ETKİNLİK</text>
 </svg>
 '''
 
@@ -261,7 +271,7 @@ def main() -> None:
 
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(render_svg(data, args.username, args.display_name), encoding="utf-8")
-    print(f"Dashboard written to {args.output}")
+    print(f"Katkı şehri oluşturuldu: {args.output}")
 
 
 if __name__ == "__main__":

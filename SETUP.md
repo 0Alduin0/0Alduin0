@@ -1,34 +1,37 @@
-# Kurulum
+# Kurulum ve bakım
 
-Bu paket doğrudan GitHub profil README deposine kopyalanmak üzere hazırlandı.
+Bu depo `0Alduin0/0Alduin0` GitHub profil README’sidir.
 
-1. GitHub kullanıcı adınla **birebir aynı isimde** herkese açık bir depo oluştur.
-2. Paketteki tüm dosyaları deponun kök dizinine kopyala.
-3. `README.md` içindeki proje adlarını, açıklamaları ve bağlantıları istediğin gibi düzenle.
-4. GitHub'da **Settings → Actions → General → Workflow permissions** bölümüne gir.
-5. **Read and write permissions** seçeneğini etkinleştir.
-6. Actions sekmesinden **Update profile dashboard** workflow'unu bir kez elle çalıştır.
+## Otomatik güncelleme
 
-Workflow depo sahibinin kullanıcı adını otomatik kullanır; ayrıca kullanıcı adı yazman gerekmez. Başarılı ilk çalıştırmadan sonra `assets/contribution-city.svg` gerçek GitHub verilerinle güncellenir ve her gün yeniden oluşturulur.
+`.github/workflows/update-profile.yml` aşağıdaki işlemleri yapar:
 
-## Ana animasyonu değiştirme
+1. Unity temalı `assets/hero.gif` kapağını yeniden üretir.
+2. `0Alduin0` hesabının gerçek GitHub katkılarını, herkese açık depolarını, takipçilerini ve öne çıkan dillerini çeker.
+3. `assets/contribution-city.svg` dosyasını günceller.
+4. Yalnızca görseller değiştiğinde `github-actions[bot]` ile commit atar.
 
-Başlık veya rol metnini yeniden render etmek için:
+Workflow her gün 02:17 UTC’de, elle tetiklendiğinde ve üretim girdileri `main` dalına gönderildiğinde çalışır. Depo ayarlarında **Settings → Actions → General → Workflow permissions → Read and write permissions** seçeneğinin açık olması gerekir.
+
+## Yerelde kapak üretme
 
 ```bash
 python -m pip install -r requirements.txt
-python scripts/generate_hero.py --name "ENES YÜREKLİ" --role "GAME & BACKEND DEVELOPER"
+python scripts/generate_hero.py --name "ENES YÜREKLİ" --role "UNITY OYUN GELİŞTİRİCİSİ"
 ```
 
-Animasyonun kaynak görseli `assets/base-scene.png`, çıktısı `assets/hero.gif` dosyasıdır. Komut ayrıca sabit önizleme olarak `assets/hero-preview.png` üretir.
+Kaynak görsel `assets/base-scene.png`, çıktılar `assets/hero.gif` ve `assets/hero-preview.png` dosyalarıdır. Metin ölçüleri betik tarafından kullanılabilir alana göre otomatik küçültülür.
 
-## Katkı şehrini yerelde deneme
+## Katkı şehrini deneme
 
-İnternet veya token olmadan örnek veriyle:
+Gerçek veri için `GITHUB_TOKEN` ortam değişkeni gerekir:
 
 ```bash
-python scripts/update_dashboard.py --username "github-kullanici-adin" --display-name "ENES YÜREKLİ" --offline
+python scripts/update_dashboard.py --username "0Alduin0" --display-name "ENES YÜREKLİ"
 ```
 
-Gerçek veriyle çalıştırmak için `GITHUB_TOKEN` ortam değişkeni gerekir. GitHub Actions bunu otomatik sağlar.
+İnternet veya token olmadan yalnızca yerleşimi kontrol etmek için:
 
+```bash
+python scripts/update_dashboard.py --username "0Alduin0" --display-name "ENES YÜREKLİ" --offline
+```
