@@ -1,8 +1,6 @@
-name: Profil panosunu güncelle
+name: Profil kapağını güncelle
 
 on:
-  schedule:
-    - cron: "17 02 * * *"
   workflow_dispatch:
   push:
     branches:
@@ -12,7 +10,6 @@ on:
       - "assets/base-scene.png"
       - "requirements.txt"
       - "scripts/generate_hero.py"
-      - "scripts/update_dashboard.py"
 
 permissions:
   contents: write
@@ -48,27 +45,16 @@ jobs:
           --name "ENES YÜREKLİ"
           --role "UNITY OYUN GELİŞTİRİCİSİ"
 
-      - name: Gerçek GitHub verileriyle katkı şehrini oluştur
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          PROFILE_USERNAME: ${{ github.repository_owner }}
-        run: >-
-          python scripts/update_dashboard.py
-          --username "$PROFILE_USERNAME"
-          --display-name "ENES YÜREKLİ"
-          --output assets/contribution-city.svg
-
       - name: Üretilen dosyaları doğrula
         run: |
           test -s assets/hero.gif
           test -s assets/hero-preview.png
-          test -s assets/contribution-city.svg
 
       - name: Değişen görselleri kaydet
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add assets/hero.gif assets/hero-preview.png assets/contribution-city.svg
+          git add assets/hero.gif assets/hero-preview.png
           if git diff --cached --quiet; then
             echo "Profil görselleri zaten güncel."
           else

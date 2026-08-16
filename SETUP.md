@@ -7,11 +7,10 @@ Bu depo `0Alduin0/0Alduin0` GitHub profil README’sidir.
 `.github/workflows/update-profile.yml` aşağıdaki işlemleri yapar:
 
 1. Unity temalı `assets/hero.gif` kapağını yeniden üretir.
-2. `0Alduin0` hesabının gerçek GitHub katkılarını, herkese açık depolarını, takipçilerini ve öne çıkan dillerini çeker.
-3. `assets/contribution-city.svg` dosyasını günceller.
-4. Yalnızca görseller değiştiğinde `github-actions[bot]` ile commit atar.
+2. Betikleri ve üretilen görselleri doğrular.
+3. Yalnızca kapak değiştiğinde `github-actions[bot]` ile commit atar.
 
-Workflow her gün 02:17 UTC’de, elle tetiklendiğinde ve üretim girdileri `main` dalına gönderildiğinde çalışır. Depo ayarlarında **Settings → Actions → General → Workflow permissions → Read and write permissions** seçeneğinin açık olması gerekir.
+Workflow elle tetiklendiğinde veya kapak üretim girdileri `main` dalına gönderildiğinde çalışır. Depo ayarlarında **Settings → Actions → General → Workflow permissions → Read and write permissions** seçeneğinin açık olması gerekir.
 
 ## Yerelde kapak üretme
 
@@ -20,7 +19,7 @@ python -m pip install -r requirements.txt
 python scripts/generate_hero.py --name "ENES YÜREKLİ" --role "UNITY OYUN GELİŞTİRİCİSİ"
 ```
 
-Kaynak görsel `assets/base-scene.png`, çıktılar `assets/hero.gif` ve `assets/hero-preview.png` dosyalarıdır. Metin ölçüleri betik tarafından kullanılabilir alana göre otomatik küçültülür.
+Kaynak görsel `assets/base-scene.png`, çıktılar `assets/hero.gif` ve `assets/hero-preview.png` dosyalarıdır. Metin ölçüleri betik tarafından kullanılabilir alana göre otomatik küçültülür. README içindeki kapak bağlantısı tıklandığında herkese açık depolar açılır.
 
 ## Katkı şehrini deneme
 

@@ -1,11 +1,10 @@
 #!/usr/bin/env python3
-"""Unity temalı GitHub profil kapağını güvenli ölçülerle animasyonlu üret."""
+"""Profesyonel Unity profil kapağını güvenli ölçülerle animasyonlu üret."""
 
 from __future__ import annotations
 
 import argparse
 import math
-import random
 from pathlib import Path
 
 from PIL import Image, ImageDraw, ImageFilter, ImageFont
@@ -21,11 +20,12 @@ HEIGHT = 400
 FRAME_COUNT = 60
 FRAME_MS = 85
 
-CYAN = (65, 224, 255)
-VIOLET = (148, 111, 255)
-AMBER = (255, 178, 91)
-WHITE = (239, 248, 255)
-MUTED = (151, 174, 201)
+CYAN = (75, 215, 244)
+VIOLET = (139, 116, 245)
+AMBER = (244, 169, 86)
+WHITE = (240, 246, 252)
+MUTED = (143, 163, 187)
+INK = (4, 10, 22)
 
 
 def find_font(size: int, *, bold: bool = False, mono: bool = False) -> ImageFont.ImageFont:
@@ -77,30 +77,21 @@ def glow_text(
     xy: tuple[int, int],
     text: str,
     font: ImageFont.ImageFont,
-    fill: tuple[int, int, int],
-    glow: tuple[int, int, int],
-    blur: int = 10,
+    color: tuple[int, int, int],
 ) -> None:
     halo = Image.new("RGBA", image.size, (0, 0, 0, 0))
-    ImageDraw.Draw(halo).text(xy, text, font=font, fill=(*glow, 170))
-    image.alpha_composite(halo.filter(ImageFilter.GaussianBlur(blur)))
-    ImageDraw.Draw(image).text(xy, text, font=font, fill=(*fill, 255))
+    ImageDraw.Draw(halo).text(xy, text, font=font, fill=(*CYAN, 105))
+    image.alpha_composite(halo.filter(ImageFilter.GaussianBlur(10)))
+    ImageDraw.Draw(image).text(xy, text, font=font, fill=(*color, 255))
 
 
-def draw_chips(draw: ImageDraw.ImageDraw) -> None:
-    chips = (("UNITY", CYAN), ("C#", VIOLET), ("OYUN SİSTEMLERİ", AMBER), ("PERFORMANS", CYAN))
+def draw_chip(draw: ImageDraw.ImageDraw, x: int, y: int, label: str, color: tuple[int, int, int]) -> int:
     font = find_font(10, bold=True, mono=True)
-    x, y = 61, 278
-    limit = 536
-    for label, color in chips:
-        box = draw.textbbox((0, 0), label, font=font)
-        chip_width = box[2] - box[0] + 20
-        if x + chip_width > limit:
-            x = 61
-            y += 34
-        draw.rounded_rectangle((x, y, x + chip_width, y + 27), radius=8, fill=(7, 19, 39, 238), outline=(*color, 230))
-        draw.text((x + 10, y + 7), label, font=font, fill=(*WHITE, 255))
-        x += chip_width + 8
+    box = draw.textbbox((0, 0), label, font=font)
+    width = box[2] - box[0] + 22
+    draw.rounded_rectangle((x, y, x + width, y + 28), radius=7, fill=(8, 19, 36, 225), outline=(*color, 150))
+    draw.text((x + 11, y + 7), label, font=font, fill=(*WHITE, 245))
+    return width
 
 
 def make_static_layer(background: Image.Image, name: str, role: str) -> Image.Image:
@@ -109,86 +100,83 @@ def make_static_layer(background: Image.Image, name: str, role: str) -> Image.Im
     shade = Image.new("RGBA", image.size, (0, 0, 0, 0))
     shade_draw = ImageDraw.Draw(shade)
     for x in range(650):
-        alpha = max(0, int(205 * (1 - x / 650)))
-        shade_draw.line((x, 0, x, HEIGHT), fill=(2, 7, 18, alpha))
+        alpha = max(0, int(220 * (1 - x / 650)))
+        shade_draw.line((x, 0, x, HEIGHT), fill=(*INK, alpha))
     image.alpha_composite(shade)
 
     draw = ImageDraw.Draw(image, "RGBA")
-    draw.rounded_rectangle((34, 34, 568, 356), radius=22, fill=(3, 10, 25, 190), outline=(*CYAN, 78))
-    draw.rounded_rectangle((46, 46, 556, 344), radius=16, outline=(*VIOLET, 48))
+    draw.rounded_rectangle((34, 38, 560, 356), radius=18, fill=(3, 9, 20, 178), outline=(116, 147, 176, 42))
+    draw.rectangle((34, 75, 37, 319), fill=(*CYAN, 215))
 
     mono_11 = find_font(11, bold=True, mono=True)
-    mono_13 = find_font(13, mono=True)
-    role_font = fitted_font(role.upper(), 18, 476, bold=True)
-    name_font = fitted_font(name.upper(), 45, 476, bold=True)
+    mono_12 = find_font(12, mono=True)
+    name_font = fitted_font(name.upper(), 45, 462, bold=True)
+    role_font = fitted_font(role.upper(), 18, 462, bold=True)
 
-    draw.ellipse((61, 60, 69, 68), fill=(*CYAN, 240))
-    draw.text((79, 57), "UNITY://PLAY_MODE", font=mono_11, fill=(*MUTED, 225))
-    status = "SAHNE HAZIR"
-    status_font = fitted_font(status, 11, 110, bold=True, mono=True)
-    draw.text((436, 57), status, font=status_font, fill=(*CYAN, 235))
+    draw.text((61, 64), "UNITY / REAL-TIME 3D", font=mono_11, fill=(*CYAN, 240))
+    draw.text((424, 64), "PORTFOLYO", font=mono_11, fill=(*MUTED, 210))
 
-    draw.text((61, 94), "MERHABA, BEN", font=mono_13, fill=(*CYAN, 245))
-    glow_text(image, (58, 116), name.upper(), name_font, WHITE, CYAN, blur=11)
-    draw.text((61, 171), role.upper(), font=role_font, fill=(*MUTED, 245))
+    glow_text(image, (58, 105), name.upper(), name_font, WHITE)
+    draw.text((61, 165), role.upper(), font=role_font, fill=(*MUTED, 245))
+    draw.line((61, 203, 518, 203), fill=(*MUTED, 45), width=1)
 
-    draw.rounded_rectangle((60, 207, 542, 260), radius=10, fill=(4, 16, 34, 225), outline=(*CYAN, 70))
-    draw.text((75, 217), "oyun@gelistirme", font=mono_11, fill=(*AMBER, 250))
-    draw.text((188, 217), ":~$", font=mono_11, fill=(*MUTED, 225))
+    descriptor = "Oynanış sistemleri · Teknik mimari · Performans"
+    descriptor_font = fitted_font(descriptor, 13, 457, mono=True)
+    draw.text((61, 221), descriptor, font=descriptor_font, fill=(*WHITE, 220))
 
-    draw_chips(draw)
+    chip_x = 61
+    for label, color in (("GAMEPLAY", CYAN), ("C#", VIOLET), ("OPTIMIZATION", AMBER)):
+        chip_x += draw_chip(draw, chip_x, 253, label, color) + 9
+
+    draw.text((328, 320), "KAPAĞA TIKLA", font=mono_11, fill=(*MUTED, 190))
+    draw.text((452, 320), "↗", font=mono_12, fill=(*CYAN, 235))
     return image
 
 
-def make_particles() -> list[tuple[float, float, float, float, int]]:
-    rng = random.Random(22072004)
-    return [
-        (rng.uniform(52, 548), rng.uniform(48, 340), rng.uniform(6, 18), rng.uniform(0, math.tau), rng.choice((1, 1, 2)))
-        for _ in range(14)
-    ]
+def draw_cta(image: Image.Image, pulse: float) -> None:
+    draw = ImageDraw.Draw(image, "RGBA")
+    x1, y1, x2, y2 = 61, 302, 294, 340
+    border_alpha = int(150 + 90 * pulse)
+    fill_alpha = int(155 + 35 * pulse)
+
+    halo = Image.new("RGBA", image.size, (0, 0, 0, 0))
+    halo_draw = ImageDraw.Draw(halo)
+    halo_draw.rounded_rectangle((x1 - 2, y1 - 2, x2 + 2, y2 + 2), radius=10, outline=(*CYAN, int(70 * pulse)), width=3)
+    image.alpha_composite(halo.filter(ImageFilter.GaussianBlur(7)))
+
+    draw.rounded_rectangle((x1, y1, x2, y2), radius=9, fill=(9, 28, 46, fill_alpha), outline=(*CYAN, border_alpha), width=1)
+    label = "PROJELERİ İNCELE"
+    font = fitted_font(label, 12, 175, bold=True, mono=True)
+    draw.text((77, 314), label, font=font, fill=(*WHITE, 250))
+    draw.line((257, 321, 276, 321), fill=(*CYAN, 240), width=2)
+    draw.line((269, 315, 276, 321), fill=(*CYAN, 240), width=2)
+    draw.line((269, 327, 276, 321), fill=(*CYAN, 240), width=2)
 
 
 def render_frames(background: Image.Image, name: str, role: str) -> list[Image.Image]:
     static = make_static_layer(background, name, role)
-    particles = make_particles()
-    command_font = find_font(14, bold=True, mono=True)
-    messages = (
-        "oyun mekaniği geliştiriyorum",
-        "performansı ölçüyorum",
-        "oyuncu hissini iyileştiriyorum",
-    )
     frames: list[Image.Image] = []
-    segment = FRAME_COUNT // len(messages)
 
     for frame_index in range(FRAME_COUNT):
         image = static.copy()
-        draw = ImageDraw.Draw(image, "RGBA")
         progress = frame_index / FRAME_COUNT
+        pulse = (math.sin(progress * math.tau * 2) + 1) / 2
+        draw_cta(image, pulse)
 
-        for x0, y0, speed, phase, radius in particles:
-            x = x0 + math.sin(progress * math.tau + phase) * 4
-            y = 48 + ((y0 - 48 - progress * speed) % 292)
-            pulse = 0.5 + 0.5 * math.sin(progress * math.tau * 2 + phase)
-            color = CYAN if int(phase * 10) % 2 == 0 else VIOLET
-            draw.ellipse((x - radius, y - radius, x + radius, y + radius), fill=(*color, int(25 + 65 * pulse)))
+        draw = ImageDraw.Draw(image, "RGBA")
+        status_alpha = int(125 + 120 * pulse)
+        draw.ellipse((532, 63, 538, 69), fill=(*CYAN, status_alpha))
 
-        message_index = min(len(messages) - 1, frame_index // segment)
-        local_frame = frame_index % segment
-        message = messages[message_index]
-        typing_frames = max(8, segment - 5)
-        visible = round(len(message) * min(1, local_frame / typing_frames))
-        command = message[:visible]
-        draw.rectangle((74, 237, 525, 254), fill=(4, 16, 34, 245))
-        draw.text((75, 237), command, font=command_font, fill=(*WHITE, 250))
-        if (frame_index // 4) % 2 == 0:
-            cursor_x = min(525, 75 + draw.textlength(command, font=command_font) + 2)
-            draw.rectangle((cursor_x, 239, min(533, cursor_x + 7), 253), fill=(*CYAN, 230))
+        scan_x = 603 + int((frame_index % 30) / 29 * 360)
+        scan = Image.new("RGBA", image.size, (0, 0, 0, 0))
+        scan_draw = ImageDraw.Draw(scan)
+        scan_draw.line((scan_x, 54, scan_x, 350), fill=(*CYAN, 30), width=2)
+        image.alpha_composite(scan.filter(ImageFilter.GaussianBlur(8)))
 
-        scan_x = 610 + int((frame_index % 30) / 29 * 330)
-        glow = Image.new("RGBA", image.size, (0, 0, 0, 0))
-        glow_draw = ImageDraw.Draw(glow)
-        glow_draw.line((scan_x, 55, scan_x, 350), fill=(*CYAN, 28), width=2)
-        image.alpha_composite(glow.filter(ImageFilter.GaussianBlur(8)))
+        warm_glow = Image.new("RGBA", image.size, (0, 0, 0, 0))
+        warm_draw = ImageDraw.Draw(warm_glow)
+        warm_draw.ellipse((684, 122, 810, 270), fill=(*AMBER, int(5 + 11 * pulse)))
+        image.alpha_composite(warm_glow.filter(ImageFilter.GaussianBlur(28)))
 
         frames.append(image.convert("RGB"))
     return frames
